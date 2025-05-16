@@ -1,0 +1,103 @@
+### Test de l'inscription
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+  "nom": "Dupont",
+  "prenom": "Jean",
+  "statut": "Étudiant",
+  "numero_inscription": "2025002",
+  "password": "motdepasse123"
+}
+
+### Test de la connexion
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+  "numero_inscription": "2025002",
+  "password": "motdepasse123"
+}
+
+### Ajouter une salle
+POST http://localhost:5000/api/salles
+Content-Type: application/json
+
+{
+  "nom": "Salle A101",
+  "capacite": 50,
+  "nombre_presents": 20,
+  "heure_ouverture": "08:00",
+  "heure_fermeture": "18:00"
+}
+
+### Récupérer une salle par ID
+GET http://localhost:5000/api/salles/1
+
+### Supprimer une salle par ID
+DELETE http://localhost:5000/api/salles/1
+
+HTTP/1.1 201 Created
+Content-Type: application/json; charset=utf-8
+
+{
+  "message": "Salle créée avec succès !",
+  "salle": {
+    "id": 1,
+    "nom": "Salle A101",
+    "capacite": 50,
+    "nombre_presents": 20,
+    "heure_ouverture": "08:00:00",
+    "heure_fermeture": "18:00:00",
+    "created_at": "2025-05-14T21:30:00.000Z"
+  }
+}
+
+### Ajouter un utilisateur (pour le test)
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+  "nom": "Dupont",
+  "prenom": "Jean",
+  "statut": "Étudiant",
+  "numero_inscription": "2025002",
+  "password": "motdepasse123"
+}
+
+### Ajouter une salle (pour le test)
+POST http://localhost:5000/api/salles
+Content-Type: application/json
+
+{
+  "nom": "Salle A101",
+  "capacite": 50,
+  "nombre_presents": 20,
+  "heure_ouverture": "08:00",
+  "heure_fermeture": "18:00"
+}
+
+### Soumettre une demande d'accès
+POST http://localhost:5000/api/demande-acces
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "salle_id": 2
+}
+
+### Approuver une demande d'accès
+PATCH http://localhost:5000/api/demande-acces/1/approuver
+Content-Type: application/json
+
+{}
+
+### Rejeter une demande d'accès (teste avec une autre demande)
+PATCH http://localhost:5000/api/demande-acces/1/rejeter
+Content-Type: application/json
+
+{}
+
+### Consulter les demandes d'un utilisateur
+GET http://localhost:5000/api/demande-acces/user/1
+
